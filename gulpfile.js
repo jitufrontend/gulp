@@ -2,9 +2,10 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var cleanCSS = require('gulp-clean-css');
+var webp = require('gulp-webp');
+var imagemin = require('gulp-imagemin');
+
 const { src, series, parallel, dest, watch } = require('gulp');
-
-
 
 gulp.task('placementJs', function(){
     path = './js/';
@@ -16,7 +17,6 @@ gulp.task('placementJs', function(){
     .pipe(minify())
     .pipe(gulp.dest('dest/js'));
 });
-
 
 gulp.task('enrolJs', function(){
     path = './js/';
@@ -128,4 +128,17 @@ gulp.task('allCss', () => {
       .pipe(gulp.dest('dest/css'));
 });
   
-  
+//minify img
+
+
+
+gulp.task('img', async () => {
+    gulp.src([
+        'images/*.png',
+        'images/*.jpg',
+        'images/*.jpeg'
+    ])
+    //   .pipe(imagemin())
+      .pipe(webp())
+      .pipe(gulp.dest('dest/img'))
+  });
